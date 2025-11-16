@@ -1,0 +1,33 @@
+[gd_scene load_steps=8 format=3 uid="uid://cclc0821kprps"]
+
+[ext_resource type="Script" uid="uid://csd5hbwxsbpcq" path="res://teachers_room.gd" id="1_of71u"]
+[ext_resource type="Texture2D" uid="uid://dmbhxl2c2p54r" path="res://teachers-room/teachersRoom1.png" id="2_eu85m"]
+[ext_resource type="Texture2D" uid="uid://flonwdcmr0kd" path="res://teachers-room/teachersRoom2.png" id="3_ljhit"]
+[ext_resource type="Texture2D" uid="uid://cbvwqb10a6xkm" path="res://teachers-room/teachersRoom3.png" id="4_eu85m"]
+[ext_resource type="Texture2D" uid="uid://bmqryp6t23u5l" path="res://teachers-room/teachersRoom4.png" id="5_mry68"]
+[ext_resource type="Texture2D" uid="uid://d16x02m586c3c" path="res://teachers-room/teachersRoom5.png" id="6_8v34x"]
+[ext_resource type="PackedScene" uid="uid://v7wgilu8nn2u" path="res://DialogueBox.tscn" id="7_8v34x"]
+
+[node name="Cutscene" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_of71u")
+cutscene_images = Array[Texture2D]([ExtResource("2_eu85m"), ExtResource("3_ljhit"), ExtResource("4_eu85m"), ExtResource("5_mry68"), ExtResource("6_8v34x")])
+cutscene_dialogues = Array[String](["1 dialogue", "2 dialogue", "3 dialogue", "4 dialogue", "5 dialogue"])
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1920.0
+offset_bottom = 1080.0
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DialogueBox" parent="." instance=ExtResource("7_8v34x")]
+layout_mode = 1
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="dialogue_closed" from="DialogueBox" to="." method="_on_dialogue_box_dialogue_closed"]

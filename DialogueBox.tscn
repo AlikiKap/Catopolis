@@ -1,0 +1,43 @@
+[gd_scene load_steps=4 format=3 uid="uid://v7wgilu8nn2u"]
+
+[ext_resource type="Texture2D" uid="uid://coi4l5bgrt3ao" path="res://text_block.png" id="1_drog7"]
+[ext_resource type="Script" uid="uid://bm1lyfpw2m7wv" path="res://dialogue_box2.gd" id="1_xetfl"]
+[ext_resource type="FontFile" uid="uid://cjkffd3tlnr5d" path="res://fonts/Zalando_Sans_SemiExpanded/static/ZalandoSansSemiExpanded-Medium.ttf" id="2_xetfl"]
+
+[node name="DialogueBox" type="Control"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 40.0
+grow_horizontal = 2
+script = ExtResource("1_xetfl")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 114.0
+offset_top = 731.0
+offset_right = 1814.0
+offset_bottom = 1031.0
+texture = ExtResource("1_drog7")
+
+[node name="TextLabel" type="Label" parent="Background"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.045
+anchor_top = 0.24300002
+anchor_right = 0.9710001
+anchor_bottom = 0.777
+offset_left = -7.5
+offset_top = 18.09999
+offset_right = -7.7000732
+offset_bottom = 17.899994
+theme_override_fonts/font = ExtResource("2_xetfl")
+theme_override_font_sizes/font_size = 28
+text = "Geez, Ms. Clark took my phone again... Well, I can just sneak into the teacher's room and take it back I guess."
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

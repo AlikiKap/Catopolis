@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbgfbrfwpvbu3"]
+
+[ext_resource type="Texture2D" uid="uid://ctroh3wblgaal" path="res://scene1.png" id="1_uxrcv"]
+[ext_resource type="Script" uid="uid://bv5p7452y27k" path="res://player2.gd" id="2_uxrcv"]
+[ext_resource type="Texture2D" uid="uid://d2the32jelup" path="res://walk/walk1.png" id="3_rf2cd"]
+[ext_resource type="PackedScene" uid="uid://v7wgilu8nn2u" path="res://DialogueBox.tscn" id="4_uxrcv"]
+[ext_resource type="PackedScene" uid="uid://c6wnfxo3cijn5" path="res://door.tscn" id="5_rf2cd"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_rpqi1"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1924, 545)
+texture = ExtResource("1_uxrcv")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(100, 0)
+script = ExtResource("2_uxrcv")
+
+[node name="CharacterSprite" type="Sprite2D" parent="Sprite2D/CharacterBody2D"]
+position = Vector2(-92, 116)
+texture = ExtResource("3_rf2cd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_rpqi1")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D/CharacterBody2D"]
+
+[node name="DialogueBox" parent="Sprite2D/CharacterBody2D" instance=ExtResource("4_uxrcv")]
+offset_left = -955.0
+offset_top = -529.0
+offset_right = -915.0
+offset_bottom = -489.0
+start_message = "Geez...Ms.Clark took my phone again. Well, I can just sneak into the teachers' room and get it back, I guess."
+
+[node name="Door" parent="." instance=ExtResource("5_rf2cd")]
+
+[connection signal="dialogue_closed" from="Sprite2D/CharacterBody2D/DialogueBox" to="Sprite2D/CharacterBody2D" method="_on_dialogue_closed"]
+[connection signal="dialogue_opened" from="Sprite2D/CharacterBody2D/DialogueBox" to="Sprite2D/CharacterBody2D" method="_on_dialogue_opened"]
