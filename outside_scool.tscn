@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bita5kahnnypw"]
+
+[ext_resource type="Texture2D" uid="uid://dgij07a5mot83" path="res://outside_school.png" id="1_7skkv"]
+[ext_resource type="Script" uid="uid://bv5p7452y27k" path="res://player2.gd" id="2_80j0d"]
+[ext_resource type="Texture2D" uid="uid://d2the32jelup" path="res://walk/walk1.png" id="3_u7ibn"]
+[ext_resource type="PackedScene" uid="uid://v7wgilu8nn2u" path="res://DialogueBox.tscn" id="4_1v74t"]
+[ext_resource type="Texture2D" uid="uid://bc4jk5byop2sh" path="res://rosie/rosie-smoking1.png" id="5_80j0d"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_57p65"]
+
+[node name="Outside_scool" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(961, 540)
+texture = ExtResource("1_7skkv")
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="Sprite2D"]
+z_index = 1
+position = Vector2(100, 0)
+script = ExtResource("2_80j0d")
+
+[node name="CharacterSprite" type="Sprite2D" parent="Sprite2D/CharacterBody2D"]
+position = Vector2(406, 258)
+texture = ExtResource("3_u7ibn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/CharacterBody2D"]
+shape = SubResource("CapsuleShape2D_57p65")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D/CharacterBody2D"]
+enabled = false
+
+[node name="DialogueBox" parent="Sprite2D/CharacterBody2D" instance=ExtResource("4_1v74t")]
+offset_left = -955.0
+offset_top = -529.0
+offset_right = -915.0
+offset_bottom = -489.0
+
+[node name="Polina" type="CharacterBody2D" parent="Sprite2D"]
+position = Vector2(-106, -28)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Polina"]
+position = Vector2(-211.99991, 131.99998)
+scale = Vector2(0.92, 0.9433333)
+texture = ExtResource("5_80j0d")
+
+[connection signal="dialogue_closed" from="Sprite2D/CharacterBody2D/DialogueBox" to="Sprite2D/CharacterBody2D" method="_on_dialogue_closed"]
+[connection signal="dialogue_opened" from="Sprite2D/CharacterBody2D/DialogueBox" to="Sprite2D/CharacterBody2D" method="_on_dialogue_opened"]
